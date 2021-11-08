@@ -13,7 +13,11 @@
           <img src="{{asset('assets/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+            @auth
+            <a href="#" class="d-block">{{Auth::User()->name}}</a>
+            @else
+                <a href="#" class="d-block">Alexander Pierce</a>
+            @endauth
         </div>
       </div>
 
@@ -665,9 +669,26 @@
               <p>Informational</p>
             </a>
           </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
+         <li class="nav-item dropdown">
+           <a href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                 <p>logout</p>
+              </a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                     <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                                 {{ __('Logout') }}
+                                    </a>
+
+                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                       @csrf
+        </form>
+          </div>
+            </li>
+            </ul>
+             </nav>
+        <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
